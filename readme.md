@@ -657,7 +657,7 @@ In this tutorial, the focus is on setting up **React Context** to manage global 
 1. **Context Creation**: 
    - The `createContext` method is used to create a context that holds a state, which in this case is a `user` object.
    - This context provides a provider that can be used to wrap the entire application or specific parts of it.
-   
+
 
 2. **User Context Provider**: 
    - A `UserContext` is created using `createContext()`. This holds `user` data and a method (`setUser`) to modify it.
@@ -681,3 +681,6 @@ In this tutorial, the focus is on setting up **React Context** to manage global 
    - The process involves setting up `createContext`, creating a provider, and wrapping the app to make the data accessible. After this, components can access and modify the state globally without prop drilling.
 
 This pattern is a powerful way to manage state in React, especially when dealing with global data like user authentication, settings, or other shared state.
+
+## 135. Build a dark mode light mode in reactjs with context api
+
