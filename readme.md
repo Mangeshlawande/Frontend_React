@@ -684,3 +684,242 @@ This pattern is a powerful way to manage state in React, especially when dealing
 
 ## 135. Build a dark mode light mode in reactjs with context api
 
+Here's a summary of the video content:
+
+The speaker discusses using React's Context API to create a theme toggler with Tailwind CSS. The goal is to design a simple theme toggler that controls the theme for a card component, allowing for a light or dark theme toggle. The video covers how to create the context and provider for managing the theme, and it introduces a new way of writing code with a custom hook for easier state management.
+
+The speaker starts by explaining the process of setting up a React project using Vite, installing Tailwind CSS, and configuring it for dark mode. The core of the video is about creating and managing context through the theme context, which holds the theme state and a toggle function. The components (`Card` and `ThemeButton`) are created, with a theme toggle button that will control the dark/light theme of the card. The context is then set up in a way that allows both components to be aware of the theme state.
+
+By using the context API and hooks together, the video demonstrates an efficient way to manage shared state without having to pass context data manually into every component. The speaker also clarifies that the goal is to simplify code by using a custom hook (`useTheme`), so components can easily access the theme context without needing to import it every time.
+
+In conclusion, the speaker highlights the power of combining context and custom hooks to improve code maintainability and ease of use when building React applications.
+
+This tutorial walks through the process of implementing a theme toggle (light/dark mode) in a React application using the Context API, along with hooks like `useContext` and `useEffect`.
+
+### Key Steps & Concepts:
+
+1. **Setting Up the Context**: 
+   - The `createContext` function is used to create a context for managing the theme (light or dark).
+   - A custom hook (`useTheme`) is created to manage the theme state and allow components to access and update the theme mode.
+
+2. **Context Provider**:
+   - The `ThemeProvider` component wraps the entire app, making the theme state available to all components. It provides the theme value (`themeMode`) and functions (`darkTheme`, `lightTheme`) to change the theme.
+   - The provider is set up in the `App.js` file, passing the theme state and functions to children components.
+
+3. **Using `useEffect` for Theme Updates**:
+   - A `useEffect` hook is employed to watch for changes in the theme (`themeMode`). When the theme mode changes (either dark or light), the class on the HTML element is updated to reflect the selected theme, applying the respective Tailwind CSS classes.
+   - The `useEffect` hook re-renders the component whenever the `themeMode` changes.
+
+4. **Theme Button**:
+   - The theme button toggles between the light and dark themes. It uses the `useTheme` hook to access the current theme and change it when clicked.
+   - An event handler (`onChange`) checks whether the dark mode should be enabled or not based on the checked status of the button.
+
+5. **Tailwind CSS Configuration**:
+   - The dark mode behavior is configured in `tailwind.config.js`. The dark mode feature is enabled via classes (`class` strategy), so the `dark` class must be applied when dark mode is active.
+
+6. **Best Practices**:
+   - The code shows two ways to manage context, one where the context is written entirely in one file (with just JavaScript), and another approach where the provider is separated into its own JSX file. Both methods work, but the former is cleaner and easier to manage, especially as the application grows.
+
+7. **Final Thoughts**:
+   - While the `Context API` is great for simple applications, larger applications may benefit from using state management libraries like `Redux`. The tutorial emphasizes the importance of understanding the Context API for small projects or for interview scenarios.
+
+This implementation demonstrates how to toggle between light and dark modes using React Context and Tailwind, making it a practical approach for styling and state management in small to medium-sized applications.
+
+## 136. Context API with local Storage
+This is a detailed step-by-step explanation of how to build a to-do app using React, Tailwind CSS, and the Context API. Let me summarize the key parts and add insights for each part:
+
+### Overview of the Project
+The goal is to build a **To-Do application** with functionalities like adding, updating, deleting, and toggling the completion status of tasks. The project will use **React**, **Tailwind CSS**, and the **Context API** for state management. The primary focus will be on the functionality (not styling) of the app.
+
+### Steps to Get Started
+
+1. **Set Up the Project**:
+   - The project is initialized using **Vite** as the build tool and **React** for the frontend. Tailwind CSS is integrated for styling.
+   - The first step is to install necessary dependencies using `npm install`.
+
+2. **Set Up Tailwind CSS**:
+   - Tailwind CSS is integrated by modifying configuration files (`tailwind.config.js` and `index.css`) to enable utility-first CSS classes in the project.
+
+3. **Set Up Context API**:
+   - A **context** is created to handle the state of the to-dos.
+   - Functions like **addToDo**, **updateToDo**, **deleteToDo**, and **toggleToDo** are defined in the context, which will later be used to manipulate the to-do list.
+
+4. **To-Do Context**:
+   - The **ToDoContext** holds the state (array of to-dos) and provides methods for modifying the to-do list.
+   - The `useContext` hook is used to access the state and methods in any component wrapped by the **ToDoProvider**.
+
+5. **Custom Hook**:
+   - A **custom hook** (`useToDo`) is created to simplify accessing the context in any component, which encapsulates the `useContext` logic and avoids redundant imports.
+
+6. **To-Do Provider**:
+   - The `ToDoProvider` wraps the components that need access to the to-do context. This ensures that all child components can access and modify the to-do list.
+
+### Code Breakdown
+
+- **Context Setup**: 
+  - A `createContext` is used to create a `ToDoContext`, which holds the state of to-dos and defines functions for adding, updating, deleting, and toggling the completion status.
+  - An initial state for to-dos is defined as an array of objects, each having an `id`, `message`, and `completed` flag.
+
+- **Context Functions**:
+  - **addToDo**: Adds a new to-do by appending it to the beginning of the existing to-dos array. A unique ID can be generated using `Date.now()` or `nano-id`.
+  - **updateToDo**: Updates an existing to-do by its ID.
+  - **deleteToDo**: Removes a to-do by its ID.
+  - **toggleComplete**: Toggles the completion status of a to-do.
+
+- **Provider Component**: 
+  - The `ToDoProvider` component wraps the entire app, providing the to-do context to all child components, allowing them to use the context's state and functions.
+
+- **Custom Hook**:
+  - The custom hook `useToDo` simplifies the process of accessing the context. This is used inside components that need to interact with the to-do list.
+
+### Development Plan
+
+1. **Component Structure**:
+   - Components for adding, displaying, and managing to-dos will be created:
+     - A form to add new to-dos.
+     - A list to display existing to-dos.
+     - Buttons for updating and deleting to-dos.
+
+2. **State Management**:
+   - React's **useState** is used to manage the list of to-dos within the component.
+   - React Context API will be used to make the to-do state and functions accessible across components.
+
+3. **Functionality Implementation**:
+   - The functionality of adding, updating, deleting, and toggling to-dos will be implemented step-by-step, starting with simple state management in the context, and then connecting it to the UI components.
+
+### Conclusion
+
+The project involves several core concepts like **React context**, **state management**, and **Tailwind CSS** for UI design. The approach follows a **modular structure** where each functionality is encapsulated, making it easy to maintain and scale. By using the **Context API**, the state management becomes centralized, allowing any component to access the to-do data and perform actions like adding, updating, or deleting to-dos. 
+
+As you build and complete the project, keep focusing on the functional aspects of the application, ensuring that each feature works correctly and smoothly.
+
+This part of the tutorial focuses on implementing core functionality in a Todo app using React, Context API, and local storage.
+
+### Key Concepts and Implementation Steps:
+1. **Update Todo**:
+   - The goal is to update the `completed` status or content of a todo. The `updateTodo` function uses `prevToDos` to loop through todos and update the matching `id` of the todo. If the `id` matches, the todo object is updated, otherwise, the existing todo is retained.
+
+2. **Delete Todo**:
+   - The `deleteTodo` function works by filtering the todo list. It uses `filter()` to create a new array, excluding the todo item whose `id` matches the provided `id`.
+
+3. **Toggle Complete**:
+   - The `toggleComplete` function toggles the `completed` status of a todo. It uses `map()` to loop through todos and updates the `completed` field for the todo with the matching `id`.
+
+4. **Local Storage Integration**:
+   - Two `useEffect` hooks are used to handle local storage interactions:
+     - One `useEffect` runs when the component loads to load todos from local storage into state, if available.
+     - Another `useEffect` updates local storage whenever the todo list changes.
+
+5. **To-Do Form Component**:
+   - The form component is a functional React component (`ToDoForm`) that allows the user to input and add new todos. It uses `useState` to manage the input and `useContext` to interact with the Todo context.
+   - The form uses a submit handler that calls the `addTodo` method from the context to add a new todo. Upon successful addition, the form input is reset to an empty state.
+
+6. **Visual Design**:
+   - The visual structure of the form includes a simple HTML form with an input field for the todo item. CSS classes (e.g., `flex`) are added for styling.
+
+In summary, this segment covers the core functionality of adding, updating, deleting, and toggling todos in the app, along with integrating local storage to persist the data across sessions. The next step is to create the components to render the todo items and integrate them with the existing functionality.
+
+It seems like you've provided a detailed walkthrough of building a React-based To-Do application using **React Context API**, **useState**, **useEffect**, and **localStorage** for state management and persistence. Here's a summary of the key points and steps covered in your explanation:
+
+---
+
+### **1. Context API Setup**
+- **Create Context**: 
+  - Used `createContext` to create a `TodoContext` for managing the state and functionality of the To-Do application.
+  - This context will hold the state (todos) and methods (add, update, delete, toggle) for managing todos.
+- **Custom Hook**:
+  - Created a custom hook `useTodo` to provide access to the context (`useContext(TodoContext)`).
+  - This hook simplifies the process of accessing the context in components.
+
+---
+
+### **2. State Management**
+- **State Initialization**:
+  - Used `useState` to manage the list of todos.
+  - Each todo item has properties like `id`, `message`, and `completed`.
+- **Local Storage**:
+  - Used `useEffect` to persist todos in `localStorage`.
+  - Whenever the `todos` state changes, the `useEffect` hook updates the `localStorage` to keep the data persistent across page reloads.
+
+---
+
+### **3. Core Functionality**
+- **Add Todo**:
+  - A function to add a new todo to the list. It takes the todo message as input and updates the state.
+- **Update Todo**:
+  - A function to update an existing todo. It takes the `id` of the todo and the new message.
+- **Delete Todo**:
+  - A function to delete a todo by its `id`.
+- **Toggle Complete**:
+  - A function to toggle the `completed` status of a todo.
+
+---
+
+### **4. Components**
+#### **TodoForm Component**
+- **Purpose**: Allows users to input a new todo.
+- **State**:
+  - Uses `useState` to manage the input value.
+- **Functionality**:
+  - On form submission, it calls the `addTodo` function from the context to add the new todo to the list.
+
+#### **TodoItem Component**
+- **Purpose**: Displays a single todo item and allows editing, toggling completion, and deletion.
+- **State**:
+  - Uses `useState` to manage whether the todo is editable (`isTodoEditable`) and the current todo message (`todoMessage`).
+- **Conditional Rendering**:
+  - If the todo is editable, it displays an input field for editing.
+  - If the todo is completed, it disables editing and applies a strikethrough style.
+- **Functionality**:
+  - **Edit Todo**: Updates the todo message and sets `isTodoEditable` to `false`.
+  - **Toggle Complete**: Toggles the `completed` status of the todo.
+  - **Delete Todo**: Deletes the todo from the list.
+
+---
+
+### **5. Conditional Rendering and Styling**
+- **CSS Classes**:
+  - Used Tailwind CSS for styling.
+  - Applied conditional classes based on the state (e.g., strikethrough for completed todos, border visibility for editable todos).
+- **Buttons**:
+  - The "Edit" button changes to a "Save" button when the todo is editable.
+  - The "Delete" button is always visible and removes the todo when clicked.
+
+---
+
+### **6. App Component**
+- **Rendering Todos**:
+  - Looped through the `todos` array using `.map()` and rendered a `TodoItem` for each todo.
+  - Passed the `todo` object as a prop to each `TodoItem`.
+- **Provider**:
+  - Wrapped the entire application with the `TodoProvider` to make the context available to all components.
+
+---
+
+### **7. Local Storage Integration**
+- **Persisting Data**:
+  - Used `localStorage` to save the todos whenever the state changes.
+  - On page load, the todos are retrieved from `localStorage` and used to initialize the state.
+
+---
+
+### **8. GitHub Repository**
+- The complete code, including CSS and components, is available on GitHub for reference.
+
+---
+
+### **Key Takeaways**
+- **Context API**: Provides a way to manage global state without prop drilling.
+- **useEffect**: Used for side effects like persisting data to `localStorage`.
+- **Conditional Rendering**: Dynamically changes the UI based on the state (e.g., editable vs. non-editable todos).
+- **Local Storage**: Ensures data persistence across page reloads.
+
+---
+
+### **Next Steps**
+- In the next video, you plan to start a "mega write summary," which likely involves consolidating the concepts covered so far and diving deeper into advanced React patterns or additional features for the To-Do app.
+
+---
+
+This walkthrough provides a solid foundation for building a React application with state management, context, and persistence.
+
